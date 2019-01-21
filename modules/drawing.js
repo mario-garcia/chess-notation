@@ -1,4 +1,4 @@
-const TILE_SIZE = 50;
+const TILE_SIZE = 75;
 const BOARD_SIZE = TILE_SIZE * 8;
 const LIGHT = '#f0d9b5';
 const DARK = '#b58863';
@@ -17,6 +17,10 @@ boardCanvas.height = BOARD_SIZE;
 boardContainer.insertBefore(boardCanvas, boardContainer.firstChild);
 
 let ctx = boardCanvas.getContext('2d');
+
+function getBoardCanvas() {
+  return boardCanvas;
+}
 
 /**
   Draws the board (no coordinates)
@@ -92,4 +96,15 @@ function _highlightSquare(x, y) {
   ctx.lineWidth = 5;
   ctx.strokeStyle = "yellow";
   ctx.strokeRect(x, y, TILE_SIZE, TILE_SIZE);
+}
+
+/**
+  Converts a canvas point (x,y) into a chess board coordinate
+**/
+function convertToBoardCoordinate(x, y) {
+  x = Math.floor(x/TILE_SIZE);
+  y = Math.floor(y/TILE_SIZE);
+  let letter = String.fromCharCode(ASCII_A + x);
+  let number = String.fromCharCode(ASCII_8 - y);
+  return `${letter}${number}`
 }

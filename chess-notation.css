@@ -15,4 +15,24 @@
 
 #inputs button {
   margin-bottom: 10px;
+  width: 150px;
+}
+
+#playingAsText {
+  margin-left: 20px;
+}
+
+#identifyInput {
+  font-size: 30px;
+}
+
+#identifyModeInput {
+  margin-top: 30px;
+  width: 150px;
+}
+
+#identifyWrong {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
 }

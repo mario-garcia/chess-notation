@@ -14,7 +14,7 @@ boardContainer.style.height = `${BOARD_SIZE}px`;
 let boardCanvas = document.createElement('canvas');
 boardCanvas.width = BOARD_SIZE;
 boardCanvas.height = BOARD_SIZE;
-boardContainer.appendChild(boardCanvas);
+boardContainer.insertBefore(boardCanvas, boardContainer.firstChild);
 
 let ctx = boardCanvas.getContext('2d');
 
@@ -59,7 +59,7 @@ function drawCoordinates(whiteOrientation = true) {
       ctx.fillStyle = color;
       let x = BOARD_SIZE - (padding * 2);
       let y = (j * TILE_SIZE) + padding + TILE_SIZE/4;
-      let number = String.fromCharCode(numberAscii)
+      let number = String.fromCharCode(numberAscii);
       ctx.fillText(number, x, y);
       numberAscii += numberIncrement;
   }
@@ -72,12 +72,24 @@ function clearBoard() {
   ctx.clearRect(0, 0, BOARD_SIZE, BOARD_SIZE);
 }
 
+/**
+  Highlights a random square on the board and returns the coordinate of the square
+**/
 function highlightRandomSquare(whiteOrientation) {
     let x = Math.floor(Math.random() * 8);
-    let y = Math.floor(Math.random() * 8);
+    let y = Math.floor(Math.random() * 8) + 1;
+    _highlightSquare(x, y);
     let coordinate = `${String.fromCharCode(ASCII_A + x)}${y}`
     return coordinate;
 }
 
-function highlightSquare(x, y) {
+/**
+  Private function to do the square highlighting
+**/
+function _highlightSquare(x, y) {
+  x = TILE_SIZE * x;
+  y = BOARD_SIZE - (TILE_SIZE * y);
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = "yellow";
+  ctx.strokeRect(x, y, TILE_SIZE, TILE_SIZE);
 }

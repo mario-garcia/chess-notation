@@ -7,12 +7,21 @@
       <div id="board">
       </div>
       <div id="inputs">
-        <button id="flipBoard">Flip Board</button> <span>Playing as <span id="playingAs">White</span></span>
+        <div id="playingAsText">Playing as <span id="playingAs">White</span></div>
+        <br/>
+        <button id="flipBoard">Flip Board</button>
+        <br/>
+        <button id="toggleCoordinates">Hide Coordinates</button>
         <br/>
         <button id="identifyMode" title="A random square will be highlighted on the board and you must enter the cooresponding coordinates into a textbox">Identify Mode</button>
         <br/>
         <button id="selectMode" title="A random coordinate will be displayed to you and you must select the cooresponding square on the board">Select Mode</button>
         <br/>
+        <div id="identifyModeInput" hidden="hidden">
+          <p>Enter the coordinate of the highlighted square and press enter</p>
+          <input id="identifyInput" size="2" maxlength="2" type="text"/>
+          <div id="identifyWrong" hidden="hidden">Sorry, try again</div>
+        </div>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

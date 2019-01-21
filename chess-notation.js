@@ -1,7 +1,7 @@
 let whiteOrientation = true;
 let showCoordinates = true;
 let hightlightedSquare = "a1";
-let selectModeOn = false;
+let selectModeOn = true;
 let identifyModeOn = false;
 let squareToSelect = "a1";
 
@@ -38,6 +38,7 @@ function identifyMode() {
   $("#selectMode").prop("disabled", false);
   $("#identifyModeDisplay").show();
   $("#selectModeDisplay").hide();
+  $("#identifyInput").focus();
   let newHighlightedSquare = highlightRandomSquare(whiteOrientation);
   while (newHighlightedSquare === hightlightedSquare) {
     newHighlightedSquare = highlightRandomSquare(whiteOrientation);
@@ -92,7 +93,8 @@ function checkSelection(event) {
   if (selectModeOn) {
     let x = event.x - $boardCanvas.offsetLeft;
     let y = event.y - $boardCanvas.offsetTop;
-    let selectedCoordinate = convertToBoardCoordinate(x, y);
+    let selectedCoordinate = convertToBoardCoordinate(x, y, whiteOrientation);
+    console.log(selectedCoordinate);
     if (selectedCoordinate == squareToSelect) {
       resetBoard();
     } else {

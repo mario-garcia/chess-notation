@@ -1,4 +1,4 @@
-const TILE_SIZE = 75;
+const TILE_SIZE = 50;
 const BOARD_SIZE = TILE_SIZE * 8;
 const LIGHT = '#f0d9b5';
 const DARK = '#b58863';
@@ -103,10 +103,10 @@ function _highlightSquare(x, y) {
 /**
   Converts a canvas point (x,y) into a chess board coordinate
 **/
-function convertToBoardCoordinate(x, y) {
+function convertToBoardCoordinate(x, y, whiteOrientation) {
   x = Math.floor(x/TILE_SIZE);
   y = Math.floor(y/TILE_SIZE);
-  let letter = String.fromCharCode(ASCII_A + x);
-  let number = String.fromCharCode(ASCII_8 - y);
+  let letter = whiteOrientation ? String.fromCharCode(ASCII_A + x) : String.fromCharCode(ASCII_H - x);
+  let number = whiteOrientation ? String.fromCharCode(ASCII_8 - y) : String.fromCharCode(ASCII_1 + y);
   return `${letter}${number}`
 }

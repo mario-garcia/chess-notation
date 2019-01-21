@@ -20,9 +20,9 @@ $("#toggleCoordinates").click(function() {
 
 $("#identifyMode").click(identifyMode);
 
-$("#identifyModeDisplay").keypress(function(event) {
-  var keycode = (event.keyCode ? event.keyCode : event.which);
-  if (keycode == '13') {
+$("#identifyInput").keyup(function() {
+  console.log("changed", this.value);
+  if (this.value.length == 2) {
     checkInputCoordinates();
   }
 });

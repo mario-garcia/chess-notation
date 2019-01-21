@@ -2,6 +2,7 @@ let whiteOrientation = true;
 let showCoordinates = true;
 let hightlightedSquare = "a1";
 let selectModeOn = false;
+let identifyModeOn = false;
 let squareToSelect = "a1";
 
 resetBoard();
@@ -18,20 +19,22 @@ $("#toggleCoordinates").click(function() {
   resetBoard();
 });
 
-$("#identifyMode").click(identifyMode);
+$("#identifyMode").click(function() {
+  identifyModeOn = true;
+  selectModeOn = false;
+  resetBoard();
+});
 
 $("#identifyInput").keyup(function() {
-  console.log("changed", this.value);
   if (this.value.length == 2) {
     checkInputCoordinates();
   }
 });
 
 function identifyMode() {
-  selectModeOn = false;
   $("#identifyWrong").hide();
-  resetBoard();
   $(this).prop("disabled", true);
+  $("#identifyMode").prop("disabled", true);
   $("#selectMode").prop("disabled", false);
   $("#identifyModeDisplay").show();
   $("#selectModeDisplay").hide();
@@ -48,22 +51,22 @@ function checkInputCoordinates() {
   let answer = $input.val();
   if (answer == hightlightedSquare) {
     $input.val('');
-    identifyMode();
+    resetBoard();
   } else {
     $("#identifyWrong").show();
   }
 }
 
 $("#selectMode").click(function() {
+  selectModeOn = true;
+  identifyModeOn = false;
   resetBoard();
-  selectMode();
 });
 
 $boardCanvas = getBoardCanvas();
 $boardCanvas.addEventListener("click", checkSelection);
 
 function selectMode() {
-  selectModeOn = true;
   $("#selectWrong").hide();
   $(this).prop("disabled", true);
   $("#identifyMode").prop("disabled", false);
@@ -91,8 +94,7 @@ function checkSelection(event) {
     let y = event.y - $boardCanvas.offsetTop;
     let selectedCoordinate = convertToBoardCoordinate(x, y);
     if (selectedCoordinate == squareToSelect) {
-      selectMode();
-      console.log("correct");
+      resetBoard();
     } else {
       $("#selectWrong").show();
     }
@@ -106,5 +108,11 @@ function resetBoard() {
   drawBoard();
   if (showCoordinates) {
     drawCoordinates(whiteOrientation);
+  }
+  if (identifyModeOn) {
+    identifyMode();
+  }
+  if (selectModeOn) {
+    selectMode();
   }
 }

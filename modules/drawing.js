@@ -83,7 +83,9 @@ function highlightRandomSquare(whiteOrientation) {
     let x = Math.floor(Math.random() * 8);
     let y = Math.floor(Math.random() * 8) + 1;
     _highlightSquare(x, y);
-    let coordinate = `${String.fromCharCode(ASCII_A + x)}${y}`
+    let letter = whiteOrientation ? String.fromCharCode(ASCII_A + x) : String.fromCharCode(ASCII_H - x);
+    let number = whiteOrientation ? y : 9 - y;
+    let coordinate = `${letter}${number}`
     return coordinate;
 }
 

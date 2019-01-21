@@ -67,6 +67,7 @@ function selectMode() {
   $("#selectWrong").hide();
   $(this).prop("disabled", true);
   $("#identifyMode").prop("disabled", false);
+  $("#selectMode").prop("disabled", true);
   $("#identifyModeDisplay").hide();
   $("#selectModeDisplay").show();
   let newSquareToSelect = getRandomSquareToSelect();
